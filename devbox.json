@@ -3,7 +3,9 @@
   "packages": [
     "k3d@latest",
     "devspace@latest",
-    "uv@latest"
+    "uv@latest",
+    "kubectl@latest",
+    "kustomize@latest"
   ],
   "shell": {
     "init_hook": [
