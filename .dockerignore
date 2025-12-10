@@ -1,0 +1,6 @@
+.claude/
+.devbox/
+.venv/
+devbox.json
+devbox.lock
+CLAUDE.md

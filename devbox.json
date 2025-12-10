@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+  "packages": [
+    "k3d@latest",
+    "devspace@latest",
+    "uv@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "cluster-create": [
+        "k3d cluster create --config k3d.yaml --registry-create registry:12345"
+      ],
+      "docker-build": [
+        "docker buildx build -t k3d-registry.localhost:12345/dev-example:latest --push .",
+        "docker buildx build --build-arg BASE_IMAGE=ghcr.io/loft-sh/devspace-containers/python:3-alpine -t k3d-registry.localhost:12345/dev-example:devspace --push ."
+      ],
+      "kustomize-apply": [
+        "kubectl apply -k kustomize/base"
+      ]
+    }
+  }
+}

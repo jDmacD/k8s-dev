@@ -1,0 +1,12 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+name: dev
+servers: 1
+image: docker.io/rancher/k3s:v1.32.10-k3s1
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer

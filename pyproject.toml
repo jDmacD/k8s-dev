@@ -1,0 +1,10 @@
+[project]
+name = "dev-example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "click>=8.1.8",
+    "flask>=3.1.2",
+]
