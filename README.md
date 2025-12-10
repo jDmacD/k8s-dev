@@ -1,36 +1,44 @@
-create a cluster with a registry
+# dev-example
+
+A Python Flask web service for Kubernetes development with k3d.
+
+## Quick Start
+
+```bash
+# Enter devbox shell
+devbox shell
+
+# Create k3d cluster with registry
+devbox run cluster-create
+
+# Build and push images
+devbox run docker-build
+
+# Deploy to cluster
+devbox run kustomize-apply
 ```
-k3d cluster create mycluster --registry-create mycluster-registry:12345
+
+## Access the Service
+
+Access at: `https://dev.127.0.0.1.sslip.io`
+
+## Development
+
+```bash
+# Run locally
+uv run python main.py
+
+# Start devspace development mode
+devbox run devspace-dev
 ```
-pull an image, tag, then push
+
+## Cleanup
+
+```bash
+devbox run cluster-rm
 ```
-docker pull nginx:latest
-docker tag nginx:latest k3d-registry.localhost:12345/nginx:latest
-docker push k3d-registry.localhost:12345/nginx:latest
-```
-deploy the image
-```
-cat <<EOF | kubectl apply -f -
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-test-registry
-  labels:
-    app: nginx-test-registry
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx-test-registry
-  template:
-    metadata:
-      labels:
-        app: nginx-test-registry
-    spec:
-      containers:
-      - name: nginx-test-registry
-        image: mycluster-registry:5000/nginx:latest
-        ports:
-        - containerPort: 80
-EOF
-```
+
+## API Endpoints
+
+- `GET /` - Welcome message
+- `GET /health` - Health check
