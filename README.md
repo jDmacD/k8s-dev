@@ -2,6 +2,10 @@
 
 A Python Flask web service for Kubernetes development with k3d.
 
+## Requirements
+- docker
+- [devbox](https://www.jetify.com/docs/devbox/installing-devbox)
+
 ## Quick Start
 
 ```bash
